@@ -8,9 +8,12 @@ namespace Lab1
 {
     class RussianFactory: Factory
     {
+
+
         public override string SetName()
         {
-            return "Армата";
+            serialNumber++;
+            return "Армата " + serialNumber;
         }
 
         public override Gun CreateGun(TypeOfGun type)

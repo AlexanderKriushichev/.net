@@ -10,7 +10,8 @@ namespace Lab1
     {
         public override string SetName()
         {
-            return "Абрамс";
+            serialNumber++;
+            return "Абрамс "+ serialNumber;
         }
 
         public override Gun CreateGun(TypeOfGun type)

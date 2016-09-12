@@ -14,6 +14,27 @@ namespace Lab1
 
         public float range { get; protected set; }
 
+        private float _health;
+
+        public float health 
+        {
+            get
+            {
+                return _health;
+            }
+            set
+            {
+                if (value >= 0)
+                {
+                    _health = value;
+                }
+                else
+                {
+                    _health = 0;
+                }
+            }
+        }
+
         public abstract void Shot();
 
         public abstract void Recharge();
@@ -21,6 +42,10 @@ namespace Lab1
         public abstract void Aiming();
 
         public abstract void Destroy();
+
+        public abstract void Reset();
+
+        public abstract void Status();
     }
 
     

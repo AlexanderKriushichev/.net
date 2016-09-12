@@ -15,15 +15,20 @@ namespace Lab1
 
         public override void Create()
         {
-            strength = 400;
+            health = 400;
+        }
+
+        public override void Reset()
+        {
+            health = 400;
         }
 
         public override void Contact(float damage)
         {
-            strength -= damage;
-            if (strength != 0)
+            health -= damage;
+            if (health != 0)
             {
-                Console.WriteLine("Попадание в композитную броню. Осталось брони: " + strength.ToString());
+                Console.WriteLine("Попадание в композитную броню. Осталось брони: " + health.ToString());
             }
             else
             {
@@ -34,6 +39,12 @@ namespace Lab1
         public override void Destroy()
         {
             Console.WriteLine("Композитная броня пробита");
+        }
+
+        public override void Status()
+        {
+            Console.WriteLine("Композитная броня :");
+            Console.WriteLine("Состояие " + health);
         }
     }
 }

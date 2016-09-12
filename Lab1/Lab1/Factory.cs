@@ -8,6 +8,10 @@ namespace Lab1
 {
     abstract class Factory
     {
+
+        protected int serialNumber;
+
+
         public abstract string SetName();
         public abstract Gun CreateGun(TypeOfGun type);
         public abstract Armor CreateArmor(TypeOfArmor type);

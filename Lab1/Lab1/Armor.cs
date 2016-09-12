@@ -8,22 +8,23 @@ namespace Lab1
 {
     abstract class Armor: IComponent
     {
-        protected float _strength;
-        public float strength
+        private float _health;
+
+        public float health
         {
             get
             {
-                return _strength;
+                return _health;
             }
             set
             {
-                if (value <= 0)
+                if (value >= 0)
                 {
-                    _strength = 0;
+                    _health = value;
                 }
                 else
                 {
-                    _strength = value;
+                    _health = 0;
                 }
             }
         }
@@ -33,6 +34,10 @@ namespace Lab1
         public abstract void Create();
 
         public abstract void Destroy();
+
+        public abstract void Reset();
+
+        public abstract void Status();
 
 
     }

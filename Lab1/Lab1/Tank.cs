@@ -14,12 +14,18 @@ namespace Lab1
         public Engine engine;
         public Gun gun;
 
+        public List<IComponent> components = new List<IComponent>();
+
         public Tank(Factory factory, TypeOfArmor armorType, TypeOfGun gunType, TypeOfEngine engineType)
         {
             name = factory.SetName();
             gun = factory.CreateGun(gunType);
+            components.Add(gun);
             engine = factory.CreateEngine(engineType);
+            components.Add(engine);
             armor = factory.CreateArmor(armorType);
+            components.Add(armor);
+
         }
 
         public void Move()

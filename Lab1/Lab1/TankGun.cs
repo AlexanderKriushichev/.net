@@ -18,6 +18,12 @@ namespace Lab1
         {
             strength = 100;
             range = 1000;
+            health = 100;
+        }
+
+        public override void Reset()
+        {
+            health = 100;
         }
 
         public override void Shot()
@@ -38,6 +44,14 @@ namespace Lab1
         public override void Destroy()
         {
             Console.WriteLine("Танковая пушка вышла из строя");
+        }
+
+        public override void Status()
+        {
+            Console.WriteLine("Танковая пушка:");
+            Console.WriteLine("Дальность " + range + " м.");
+            Console.WriteLine("Урон " + strength);
+            Console.WriteLine("Состояие " + health);
         }
     }
 }

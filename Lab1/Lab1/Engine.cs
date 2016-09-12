@@ -28,6 +28,27 @@ namespace Lab1
             }
         }
 
+        private float _health;
+
+        public float health
+        {
+            get
+            {
+                return _health;
+            }
+            set
+            {
+                if (value >= 0)
+                {
+                    _health = value;
+                }
+                else
+                {
+                    _health = 0;
+                }
+            }
+        }
+
         public abstract void Create();
 
         public float power { get; protected set; }
@@ -39,5 +60,10 @@ namespace Lab1
         public abstract void TurnOff();
 
         public abstract void Destroy();
+
+        public abstract void Reset();
+
+        public abstract void Status();
+
     }
 }

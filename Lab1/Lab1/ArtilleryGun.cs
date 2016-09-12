@@ -18,6 +18,12 @@ namespace Lab1
         {
             strength = 50;
             range = 5000;
+            health = 100;
+        }
+
+        public override void Reset()
+        {
+            health = 100;
         }
 
         public override void Shot()
@@ -38,6 +44,14 @@ namespace Lab1
         public override void Destroy()
         {
             Console.WriteLine("Артилллерийская пушка вышла из строя");
+        }
+
+        public override void Status()
+        {
+            Console.WriteLine("Артилллерийская пушка:");
+            Console.WriteLine("Дальность " + range + " м.");
+            Console.WriteLine("Урон " + strength);
+            Console.WriteLine("Состояие " + health);
         }
     }
 }

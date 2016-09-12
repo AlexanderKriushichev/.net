@@ -16,15 +16,20 @@ namespace Lab1
 
         public override void Create()
         {
-            strength = 500;
+            health = 500;
+        }
+
+        public override void Reset()
+        {
+            health = 500;
         }
 
         public override void Contact(float damage)
         {
-            strength -= damage;
-            if (strength != 0)
+            health -= damage;
+            if (health != 0)
             {
-                Console.WriteLine("Попадание в динамическую броню. Осталось брони: " + strength.ToString());
+                Console.WriteLine("Попадание в динамическую броню. Осталось брони: " + health.ToString());
             }
             else
             {
@@ -35,6 +40,12 @@ namespace Lab1
         public override void Destroy()
         {
             Console.WriteLine("Динамическая броня пробита");
+        }
+
+        public override void Status()
+        {
+            Console.WriteLine("Динамическая броня :");
+            Console.WriteLine("Состояие " + health);
         }
     }
 }

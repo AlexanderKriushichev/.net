@@ -8,8 +8,12 @@ namespace Lab1
 {
     interface IComponent
     {
-         void Create();
+        void Create();
 
-         void Destroy();
+        void Reset();
+
+        void Status();
+
+        void Destroy();
     }
 }

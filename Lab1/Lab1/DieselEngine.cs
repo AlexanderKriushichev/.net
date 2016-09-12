@@ -17,6 +17,13 @@ namespace Lab1
         {
             fuelСapacity = 1000;
             power = 800;
+            health = 100;
+        }
+
+        public override void Reset()
+        {
+            fuelСapacity = 1000;
+            health = 100;
         }
 
         public override void Drive()
@@ -37,6 +44,14 @@ namespace Lab1
         public override void Destroy()
         {
             Console.WriteLine("Дизельный двигатель вышел из строя");
+        }
+
+        public override void Status()
+        {
+            Console.WriteLine("Газотурбинный двигатель :");
+            Console.WriteLine("Мощность " + power);
+            Console.WriteLine("Запас горючего " + fuelСapacity);
+            Console.WriteLine("Состояие " + health);
         }
     }
 }
