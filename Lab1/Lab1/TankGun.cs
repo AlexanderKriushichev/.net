@@ -44,6 +44,7 @@ namespace Lab1
         public override void Destroy()
         {
             Console.WriteLine("Танковая пушка вышла из строя");
+            health = 0;
         }
 
         public override void Status()

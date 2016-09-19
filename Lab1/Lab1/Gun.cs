@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    abstract class Gun: IComponent
+    abstract class Gun: IComponent 
     {
         public abstract void Create();
 

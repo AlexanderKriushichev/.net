@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Lab1
 {
-    class Tank
+    class Tank : ICloneable, ITank<IComponent> 
     {
         public string name;
 
@@ -16,16 +17,25 @@ namespace Lab1
 
         public List<IComponent> components = new List<IComponent>();
 
-        public Tank(Factory factory, TypeOfArmor armorType, TypeOfGun gunType, TypeOfEngine engineType)
-        {
-            name = factory.SetName();
-            gun = factory.CreateGun(gunType);
-            components.Add(gun);
-            engine = factory.CreateEngine(engineType);
-            components.Add(engine);
-            armor = factory.CreateArmor(armorType);
-            components.Add(armor);
+        private Factory factory;
+        private TypeOfArmor typeOfArmor;
+        private TypeOfGun typeOfGun;
+        private TypeOfEngine typeOfEngine;
 
+        public Tank(Factory factoryType, TypeOfArmor armorType, TypeOfGun gunType, TypeOfEngine engineType)
+        {
+            name = factoryType.SetName();
+            gun = factoryType.CreateGun(gunType);
+            SetComponent(gun);
+            engine = factoryType.CreateEngine(engineType);
+            SetComponent(engine);
+            armor = factoryType.CreateArmor(armorType);
+            SetComponent(armor);
+
+            factory = factoryType;
+            typeOfArmor = armorType;
+            typeOfGun = gunType;
+            typeOfEngine = engineType;
         }
 
         public void Move()
@@ -46,6 +56,24 @@ namespace Lab1
         public void Contact()
         {
             armor.Contact(gun.strength);
+        }
+
+        public object Clone()
+        {
+            return new Tank(factory, typeOfArmor, typeOfGun, typeOfEngine);
+        }
+
+        public void GetStatus()
+        {
+            foreach (IComponent comp in components)
+            {
+                comp.Status();
+            }
+        }
+
+        public void SetComponent(IComponent comp)
+        {
+            components.Add(comp);
         }
     }
 }

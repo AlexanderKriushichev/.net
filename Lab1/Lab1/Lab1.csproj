@@ -52,10 +52,12 @@
     <Compile Include="GasturbineEngine.cs" />
     <Compile Include="Gun.cs" />
     <Compile Include="IComponent.cs" />
+    <Compile Include="ITank.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RussianFactory.cs" />
     <Compile Include="Tank.cs" />
+    <Compile Include="TankBattalion.cs" />
     <Compile Include="TankGun.cs" />
   </ItemGroup>
   <ItemGroup>

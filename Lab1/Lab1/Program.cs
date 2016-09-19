@@ -12,21 +12,23 @@ namespace Lab1
         {
             RussianFactory russianFactory = new RussianFactory();
 
+            TankBattalion<Tank> tankBattalion = new TankBattalion<Tank>();
+
+            
+
             Tank tank = new Tank(russianFactory, TypeOfArmor.Dynamic, TypeOfGun.Artillery, TypeOfEngine.Gasturbine);
             tank.Move();
 
-            Tank tank2 = new Tank(russianFactory, TypeOfArmor.Dynamic, TypeOfGun.Artillery, TypeOfEngine.Gasturbine);
-            tank2.Move();
+            Tank tank1 = (Tank)tank.Clone();
+            tankBattalion.Add(tank);
+            tankBattalion.Add(tank1);
+            tankBattalion.Add((Tank)tank.Clone());
+            tank.gun.Destroy();
 
-            Tank tank3 = new Tank(russianFactory, TypeOfArmor.Dynamic, TypeOfGun.Artillery, TypeOfEngine.Gasturbine);
-            tank3.Move();
-
-            Tank tank1 = new Tank(new AmericanFactory(), TypeOfArmor.Composite, TypeOfGun.Tank, TypeOfEngine.Diesel);
-            tank1.Move();
-
-            foreach (IComponent comp in tank.components)
+            foreach (Tank t in tankBattalion)
             {
-                comp.Status();
+                t.GetStatus();
+                
             }
 
             Console.ReadLine();

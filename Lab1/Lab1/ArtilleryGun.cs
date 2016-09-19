@@ -44,6 +44,8 @@ namespace Lab1
         public override void Destroy()
         {
             Console.WriteLine("Артилллерийская пушка вышла из строя");
+            health = 0;
+
         }
 
         public override void Status()
