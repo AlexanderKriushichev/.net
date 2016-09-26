@@ -8,6 +8,8 @@ namespace Lab1
 {
     abstract class Gun: IComponent 
     {
+        public delegate void Del();
+
         public abstract void Create();
 
         public float strength { get; protected set; }
@@ -35,7 +37,7 @@ namespace Lab1
             }
         }
 
-        public abstract void Shot();
+        public abstract void Shot(Del del);
 
         public abstract void Recharge();
 

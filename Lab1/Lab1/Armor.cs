@@ -39,6 +39,8 @@ namespace Lab1
 
         public abstract void Status();
 
+        public abstract float GetHealth();
+
 
     }
 }

@@ -14,6 +14,11 @@ namespace Lab1
             Create();
         }
 
+        public override float GetHealth()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void Create()
         {
             health = 500;

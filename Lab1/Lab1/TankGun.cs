@@ -26,9 +26,11 @@ namespace Lab1
             health = 100;
         }
 
-        public override void Shot()
+        public override void Shot(Del del)
         {
             Console.WriteLine("Стреляет танковая пушка");
+            del.Invoke();
+
         }
 
         public override void Recharge()

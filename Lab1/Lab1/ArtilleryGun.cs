@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    class ArtilleryGun: Gun
+    class ArtilleryGun: Gun, IComponentInfo<ArtilleryGun>
     {
+        public string name = "ArtilleryGun";
 
         public ArtilleryGun()
         {
             Create();
+        }
+
+        public void Info(ArtilleryGun obj)
+        {
+            Console.Write("Info " + obj.name);
         }
 
         public override void Create()
@@ -26,9 +32,10 @@ namespace Lab1
             health = 100;
         }
 
-        public override void Shot()
+        public override void Shot(Del del)
         {
             Console.WriteLine("Стреляет артилллерийская пушка");
+            del.Invoke();
         }
 
         public override void Recharge()

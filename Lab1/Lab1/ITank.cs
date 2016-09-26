@@ -11,5 +11,6 @@ namespace Lab1
     {
         void SetComponent(T component);
         void GetStatus();
+        List<T> ReturnObject();
     }
 }

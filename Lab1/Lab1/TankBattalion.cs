@@ -12,11 +12,11 @@ namespace Lab1
         private List<T> tanks = new List<T>();
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return new TankEnumerator(this);
+            return  TankEnumerator();
         }
         public IEnumerator<T> GetEnumerator()
         {
-            return new TankEnumerator(this);
+            return  TankEnumerator();
         }
        
         
@@ -99,49 +99,16 @@ namespace Lab1
             set { tanks[index] = value; }
         }
 
-        public class TankEnumerator : IEnumerator<T>
+        public IEnumerator<T> TankEnumerator()
         {
-            private TankBattalion<T> _collection;
-            private int curIndex;
-            private T curBox;
-
-
-            public TankEnumerator(TankBattalion<T> collection)
+            for (int i = 0; i < tanks.Count; i++)
             {
-                _collection = collection;
-                curIndex = -1;
-                curBox = default(T);
-
-            }
-
-            public bool MoveNext()
-            {
-                if (++curIndex >= _collection.Count)
+                yield return tanks[i];
+                if (i == tanks.Count)
                 {
-                    return false;
+                    i = 0;
                 }
-                else
-                {
-                    curBox = _collection[curIndex];
-                }
-                return true;
             }
-
-            public void Reset() { curIndex = -1; }
-
-            void IDisposable.Dispose() { }
-
-            public T Current
-            {
-                get { return curBox; }
-            }
-
-
-            object IEnumerator.Current
-            {
-                get { return Current; }
-            }
-
         }
     }
 }

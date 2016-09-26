@@ -16,4 +16,14 @@ namespace Lab1
 
         void Destroy();
     }
+
+    interface IComponentName<out T> : IComponent
+    {
+        T ReturnName();
+    }
+
+    interface IComponentInfo<in T> : IComponent
+    {
+        void Info(T obj);
+    }
 }

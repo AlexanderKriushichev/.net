@@ -44,13 +44,31 @@ namespace Lab1
             engine.Drive();
         }
 
-        public void Shot(Tank target)
+        public void Shot(Tank target, Action act)
         {
+            act.Invoke();
             Console.Write(name + ": ");
-            gun.Shot();
+            gun.Shot(gun.Recharge);
             Console.Write(target.name + ": ");
 
             target.armor.Contact(gun.strength);
+        }
+
+        public void Shot(Tank target)
+        {
+            Console.Write(name + ": ");
+            gun.Shot(gun.Recharge);
+            Console.Write(target.name + ": ");
+
+            target.armor.Contact(gun.strength);
+        }
+
+        public void Aimp(Func<float> fn)
+        {
+            if (fn.Invoke() > 100)
+            {
+                Console.WriteLine("Приоритетная цель");
+            }
         }
 
         public void Contact()
@@ -61,6 +79,11 @@ namespace Lab1
         public object Clone()
         {
             return new Tank(factory, typeOfArmor, typeOfGun, typeOfEngine);
+        }
+
+        public List<IComponent> ReturnObject()
+        {
+            return components;
         }
 
         public void GetStatus()

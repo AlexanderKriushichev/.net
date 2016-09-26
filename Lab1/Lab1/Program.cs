@@ -17,9 +17,14 @@ namespace Lab1
             
 
             Tank tank = new Tank(russianFactory, TypeOfArmor.Dynamic, TypeOfGun.Artillery, TypeOfEngine.Gasturbine);
-            tank.Move();
-
             Tank tank1 = (Tank)tank.Clone();
+
+            //tank.Move();
+            //tank.Shot(tank1);
+            //tank.Shot(tank1,tank1.Move);
+
+            //tank.Aimp(tank1.armor.GetHealth);
+
             tankBattalion.Add(tank);
             tankBattalion.Add(tank1);
             tankBattalion.Add((Tank)tank.Clone());
@@ -28,7 +33,7 @@ namespace Lab1
             foreach (Tank t in tankBattalion)
             {
                 t.GetStatus();
-                
+
             }
 
             Console.ReadLine();
