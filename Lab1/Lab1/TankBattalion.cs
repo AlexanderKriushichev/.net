@@ -9,6 +9,16 @@ namespace Lab1
 {
     class TankBattalion<T> : ICollection<T> where T : Tank
     {
+
+        public delegate List<T> Del(List<T> newList);
+
+        public Del del;
+
+        public TankBattalion(Del newDel)
+        {
+            del = newDel;
+        }
+
         private List<T> tanks = new List<T>();
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -18,8 +28,70 @@ namespace Lab1
         {
             return  TankEnumerator();
         }
-       
-        
+
+        public void Sort()
+        {
+            T obmTank;
+            for (int i = 0; i < tanks.Count-1; i++)
+            {
+                if (tanks[i].armor.health < tanks[i + 1].armor.health)
+                {
+                    obmTank = tanks[i];
+                    tanks[i] = tanks[i + 1];
+                    tanks[i + 1] = obmTank;
+                }
+            }
+        }
+
+        public void newSort()
+        {
+            tanks = del(tanks);
+        }
+
+        public T Comparison(TypeOfComparison typeOfComparison, T firstTank, T secondTank)
+        {
+            switch (typeOfComparison)
+            {
+                case TypeOfComparison.Armor:
+                    {
+                        if (firstTank.armor.health > secondTank.armor.health)
+                        {
+                            return firstTank;
+                        }
+                        else
+                        {
+                            return secondTank;
+                        }
+                    }
+                case TypeOfComparison.Engine :
+                        {
+                            if (firstTank.engine.health > secondTank.engine.health)
+                            {
+                                return firstTank;
+                            }
+                            else
+                            {
+                                return secondTank;
+                            }
+                        }
+                case TypeOfComparison.Gun:
+                        {
+                            if (firstTank.gun.health > secondTank.gun.health)
+                            {
+                                return firstTank;
+                            }
+                            else
+                            {
+                                return secondTank;
+                            }
+                        }
+                default:
+                        {
+                            return firstTank;
+                        }
+            }
+        }
+
         public bool Contains(T item)
         {
             bool found = false;
@@ -112,3 +184,5 @@ namespace Lab1
         }
     }
 }
+
+public enum TypeOfComparison { Armor, Gun, Engine}
