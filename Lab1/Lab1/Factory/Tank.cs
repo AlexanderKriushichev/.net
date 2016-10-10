@@ -9,11 +9,15 @@ namespace Lab1
 {
     class Tank : ICloneable, ITank<IComponent> 
     {
-        public string name;
+        public string name { get; set; }
 
-        public Armor armor;
-        public Engine engine;
-        public Gun gun;
+        public event Action<TankEventArgs> OnShot;
+        public event Action<TankEventArgs> OnMove;
+        public event Action<TankEventArgs> OnDestroy;
+
+        public Armor armor { get; set; }
+        public Engine engine { get; set; }
+        public Gun gun { get; set; }
 
         public List<IComponent> components = new List<IComponent>();
 
@@ -40,25 +44,22 @@ namespace Lab1
 
         public void Move()
         {
-            Console.Write(name + ": ");
+            OnMove.Invoke(new TankEventArgs(EventType.Move));
             engine.Drive();
         }
 
         public void Shot(Tank target, Action act)
         {
             act.Invoke();
-            Console.Write(name + ": ");
             gun.Shot(gun.Recharge);
-            Console.Write(target.name + ": ");
-
+            OnShot.Invoke(new TankShotEventArgs(target));
             target.armor.Contact(gun.strength);
         }
 
         public void Shot(Tank target)
         {
-            Console.Write(name + ": ");
             gun.Shot(gun.Recharge);
-            Console.Write(target.name + ": ");
+            OnShot.Invoke(new TankShotEventArgs(target));
 
             target.armor.Contact(gun.strength);
         }

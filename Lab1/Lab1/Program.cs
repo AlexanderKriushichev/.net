@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Lab1
 {
@@ -19,10 +20,18 @@ namespace Lab1
             Tank tank = new Tank(russianFactory, TypeOfArmor.Dynamic, TypeOfGun.Artillery, TypeOfEngine.Gasturbine);
             Tank tank1 = (Tank)tank.Clone();
 
+            var consLogger = new ConsoleLogger<ITank<IComponent>>(tank);
+            var fileLogger = new FileLogger<ITank<IComponent>>(tank1, "log1.txt");
+
+            consLogger.Log += LogOnLog;
+            fileLogger.Log += LogOnLog;
+
             //tank.Move();
             //tank.Shot(tank1);
-            tank.Shot(tank1, tank1.Move);
-
+            tank.Shot(tank1);
+            tank1.Move();
+            tank1.Shot(tank);
+            tank.Move();
             //tank.Aimp(tank1.armor.GetHealth);
 
             tankBattalion.Add(tank);
@@ -30,19 +39,19 @@ namespace Lab1
             tankBattalion.Add((Tank)tank.Clone());
             tank.gun.Destroy();
 
-            foreach (Tank t in tankBattalion)
-            {
-                t.GetStatus();
+            //foreach (Tank t in tankBattalion)
+            //{
+            //    t.GetStatus();
 
-            }
+            //}
 
-            tankBattalion.newSort();
+            //tankBattalion.newSort();
 
-            foreach (Tank t in tankBattalion)
-            {
-                t.GetStatus();
+            //foreach (Tank t in tankBattalion)
+            //{
+            //    t.GetStatus();
 
-            }
+            //}
 
             Console.ReadLine();
         }
@@ -75,6 +84,31 @@ namespace Lab1
                         merged[i]= mass1[a++];
             }
             return merged.ToList();
+        }
+
+        /// <summary>
+        /// Метод печати лога
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="tank"></param>
+        /// <param name="args"></param>
+        public static void LogOnLog(TextWriter writer, ITank<IComponent> tank, TankEventArgs args)
+        {
+            string message = "";
+            switch (args.type)
+            {
+                case EventType.Move:
+                    message = "Танк " + tank.name + " движется";
+                    break;
+                case EventType.Destroy:
+                    message = "Танк " + tank.name + " уничтожен";
+                    break;
+                case EventType.Shot:
+                    message = "Танк " + tank.name + " стреляет по " + (args as  TankShotEventArgs).target.name;
+                    break;
+                
+            }
+            writer.WriteLine(DateTime.Now.ToString("HH:mm:ss") + " " + message);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Lab1
 
         public override void Drive()
         {
-            Console.WriteLine("Танк с газотурбинным  двигателем передвигается");
+            //Console.WriteLine("Танк с газотурбинным  двигателем передвигается");
         }
 
         public override void TurnOn()
