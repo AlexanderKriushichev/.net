@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Lab1.Exceptions;
+using Lab1.Logger;
 
 namespace Lab1
 {
@@ -18,7 +20,7 @@ namespace Lab1
             
 
             Tank tank = new Tank(russianFactory, TypeOfArmor.Dynamic, TypeOfGun.Artillery, TypeOfEngine.Gasturbine);
-            Tank tank1 = (Tank)tank.Clone();
+            Tank tank1 = Tank.CreateFromFile("tank.txt");
 
             var consLogger = new ConsoleLogger<ITank<IComponent>>(tank);
             var fileLogger = new FileLogger<ITank<IComponent>>(tank1, "log1.txt");
@@ -28,10 +30,38 @@ namespace Lab1
 
             //tank.Move();
             //tank.Shot(tank1);
-            tank.Shot(tank1);
-            tank1.Move();
-            tank1.Shot(tank);
-            tank.Move();
+
+            // не сработает, так как нет цели, пользовательское исключение 
+            try
+            {
+                tank1.Shot(null);
+            }
+            catch (UserException error)
+            {
+                ExceptionsLogger.LogUserException(error);
+            }
+            catch (Exception error)
+            {
+                ExceptionsLogger.LogSystemException(error);
+            }
+
+            // не сработает, такого элемента нет, системное исключение
+            try
+            {
+                tank1.Shot(tankBattalion[0]);
+            }
+            catch (UserException error)
+            {
+                ExceptionsLogger.LogUserException(error);
+            }
+            catch (Exception error)
+            {
+                ExceptionsLogger.LogSystemException(error);
+            }
+            //tank.Shot(tank1);
+            //tank1.Move();
+            //tank1.Shot(tank);
+            //tank.Move();
             //tank.Aimp(tank1.armor.GetHealth);
 
             tankBattalion.Add(tank);

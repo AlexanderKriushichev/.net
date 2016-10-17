@@ -41,10 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\UserException.cs" />
     <Compile Include="Factory\AmericanFactory.cs" />
     <Compile Include="Factory\Armor.cs" />
     <Compile Include="Factory\ArtilleryGun.cs" />
     <Compile Include="Factory\CompositeArmor.cs" />
+    <Compile Include="Logger\ExceptionsLogger.cs" />
     <Compile Include="Logger\TankEventArgs.cs" />
     <Compile Include="Logger\ConsoleLogger.cs" />
     <Compile Include="Factory\DieselEngine.cs" />

@@ -4,6 +4,8 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lab1.Exceptions;
+using System.IO;
 
 namespace Lab1
 {
@@ -48,16 +50,81 @@ namespace Lab1
             engine.Drive();
         }
 
-        public void Shot(Tank target, Action act)
+        public static Tank CreateFromFile(string path)
         {
-            act.Invoke();
-            gun.Shot(gun.Recharge);
-            OnShot.Invoke(new TankShotEventArgs(target));
-            target.armor.Contact(gun.strength);
+            var info = File.ReadAllLines(path);
+
+            TypeOfArmor armorType = TypeOfArmor.Composite;
+            TypeOfEngine engineType = TypeOfEngine.Gasturbine;
+            TypeOfGun gunType = TypeOfGun.Tank;
+            Factory factoryType = new RussianFactory();
+
+            try
+            {
+                switch (info[0])
+                {
+                    case "Russian":
+                        {
+                            factoryType = new RussianFactory();
+                            break;
+                        }
+                    case "American":
+                        {
+                            factoryType = new AmericanFactory();
+                            break;
+                        }
+                }
+                switch (info[1])
+                {
+                    case "Artillery":
+                        {
+                            gunType = TypeOfGun.Artillery;
+                            break;
+                        }
+                    case "Tank":
+                        {
+                            gunType = TypeOfGun.Tank;
+                            break;
+                        }
+                }
+                switch (info[2])
+                {
+                    case "Dynamic":
+                        {
+                            armorType = TypeOfArmor.Dynamic;
+                            break;
+                        }
+                    case "Composite":
+                        {
+                            armorType = TypeOfArmor.Composite;
+                            break;
+                        }
+                }
+                switch (info[3])
+                {
+                    case "Diesel":
+                        {
+                            engineType = TypeOfEngine.Diesel;
+                            break;
+                        }
+                    case "Gasturbine":
+                        {
+                            engineType = TypeOfEngine.Gasturbine;
+                            break;
+                        }
+                }               
+            }
+            catch (FormatException) { throw new FileFormatException("Входной файл имел неверный формат"); }
+
+            return new Tank(factoryType, armorType, gunType, engineType);
         }
 
         public void Shot(Tank target)
         {
+            if (target == this)
+                throw new TankShotException("Нельзя стрелять по самому себе");
+            if (target == null)
+                throw new TankShotException("Выберите цель для выстрела");
             gun.Shot(gun.Recharge);
             OnShot.Invoke(new TankShotEventArgs(target));
 
