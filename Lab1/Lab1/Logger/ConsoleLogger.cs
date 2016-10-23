@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Lab1
 {
@@ -11,7 +12,7 @@ namespace Lab1
     /// Класс для печати лога в консоль
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    class ConsoleLogger<T>: ILogger<T> where T: ITank<IComponent>
+    class ConsoleLogger<T> : ILogger<T> where T : ITank<IComponent>
     {
         public event Action<TextWriter, T, TankEventArgs> Log;
 
@@ -35,13 +36,17 @@ namespace Lab1
         /// <param name="args"></param>
         private void TankEventHandler(TankEventArgs args)
         {
-            using (var writer = Console.Out)
-            {
-                if (Log != null)
-                {
-                    Log(writer, tank, args);
-                }
-            }
+            Thread thread = new Thread(() =>
+               {
+                   using (var writer = Console.Out)
+                   {
+                       if (Log != null)
+                       {
+                           Log(writer, tank, args);
+                       }
+                   }
+               });
+            thread.Start();
         }
 
     }

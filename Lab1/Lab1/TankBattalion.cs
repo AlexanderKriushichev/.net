@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Lab1
@@ -13,6 +14,34 @@ namespace Lab1
         public delegate List<T> Del(List<T> newList);
 
         public Del del;
+
+        public int sortProgress { get; private set; }
+
+        private static void SortProgress(int pr)
+        {
+            Console.Write("\rПрогресс: {0}%", pr);
+        }
+
+        public TankBattalion(int count)
+        {
+            RussianFactory russianFactory = new RussianFactory();
+            Random r = new Random();
+            for (int i = 0; i < count; i++)
+            {
+                if (r.Next(2) == 0)
+                {
+                    Tank tank = new Tank(russianFactory, TypeOfArmor.Dynamic, TypeOfGun.Artillery, TypeOfEngine.Gasturbine);
+
+                    tanks.Add((T)tank);
+                }
+                else
+                {
+                    Tank tank = new Tank(russianFactory, TypeOfArmor.Composite, TypeOfGun.Artillery, TypeOfEngine.Gasturbine);
+
+                    tanks.Add((T)tank);
+                }
+            }
+        }
 
         public TankBattalion(Del newDel)
         {
@@ -41,6 +70,27 @@ namespace Lab1
                     tanks[i + 1] = obmTank;
                 }
             }
+        }
+
+        public async Task AsyncSort()
+        {
+            await Task.Run(() =>
+            {
+                T obmTank;
+                for (int i = 0; i < tanks.Count - 1; i++)
+                {
+                    if (tanks[i].armor.health < tanks[i + 1].armor.health)
+                    {
+                        obmTank = tanks[i];
+                        tanks[i] = tanks[i + 1];
+                        tanks[i + 1] = obmTank;
+                    }
+                    sortProgress = i * 100 / tanks.Count;
+                    SortProgress(sortProgress);
+                }
+                SortProgress(100);
+                Console.WriteLine("Сортировка завершена");
+            });
         }
 
         public void newSort()

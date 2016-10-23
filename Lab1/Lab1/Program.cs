@@ -15,7 +15,7 @@ namespace Lab1
         {
             RussianFactory russianFactory = new RussianFactory();
 
-            TankBattalion<Tank> tankBattalion = new TankBattalion<Tank>(sort);
+            TankBattalion<Tank> tankBattalion = new TankBattalion<Tank>(100000);
 
             
 
@@ -28,60 +28,52 @@ namespace Lab1
             consLogger.Log += LogOnLog;
             fileLogger.Log += LogOnLog;
 
-            //tank.Move();
-            //tank.Shot(tank1);
+            ////tank.Move();
+            ////tank.Shot(tank1);
 
-            // не сработает, так как нет цели, пользовательское исключение 
-            try
-            {
-                tank1.Shot(null);
-            }
-            catch (UserException error)
-            {
-                ExceptionsLogger.LogUserException(error);
-            }
-            catch (Exception error)
-            {
-                ExceptionsLogger.LogSystemException(error);
-            }
-
-            // не сработает, такого элемента нет, системное исключение
-            try
-            {
-                tank1.Shot(tankBattalion[0]);
-            }
-            catch (UserException error)
-            {
-                ExceptionsLogger.LogUserException(error);
-            }
-            catch (Exception error)
-            {
-                ExceptionsLogger.LogSystemException(error);
-            }
-            //tank.Shot(tank1);
-            //tank1.Move();
-            //tank1.Shot(tank);
-            //tank.Move();
-            //tank.Aimp(tank1.armor.GetHealth);
-
-            tankBattalion.Add(tank);
-            tankBattalion.Add(tank1);
-            tankBattalion.Add((Tank)tank.Clone());
-            tank.gun.Destroy();
-
-            //foreach (Tank t in tankBattalion)
+            //// не сработает, так как нет цели, пользовательское исключение 
+            //try
             //{
-            //    t.GetStatus();
-
+            //    tank1.Shot(null);
+            //}
+            //catch (UserException error)
+            //{
+            //    ExceptionsLogger.LogUserException(error);
+            //}
+            //catch (Exception error)
+            //{
+            //    ExceptionsLogger.LogSystemException(error);
             //}
 
-            //tankBattalion.newSort();
-
-            //foreach (Tank t in tankBattalion)
+            //// не сработает, такого элемента нет, системное исключение
+            //try
             //{
-            //    t.GetStatus();
-
+            //    tank1.Shot(tankBattalion[0]);
             //}
+            //catch (UserException error)
+            //{
+            //    ExceptionsLogger.LogUserException(error);
+            //}
+            //catch (Exception error)
+            //{
+            //    ExceptionsLogger.LogSystemException(error);
+            //}
+            ////tank.Shot(tank1);
+            ////tank1.Move();
+            ////tank1.Shot(tank);
+            ////tank.Move();
+            ////tank.Aimp(tank1.armor.GetHealth);
+
+            //tankBattalion.Add(tank);
+            //tankBattalion.Add(tank1);
+            //tankBattalion.Add((Tank)tank.Clone());
+            //tank.gun.Destroy();
+
+
+            Task t = tankBattalion.AsyncSort();
+            t.Wait();
+
+            
 
             Console.ReadLine();
         }
