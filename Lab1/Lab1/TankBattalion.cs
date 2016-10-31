@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    class TankBattalion<T> : ICollection<T> where T : Tank
+    [Serializable]
+    public class TankBattalion<T> : ICollection<T> where T : Tank
     {
 
         public delegate List<T> Del(List<T> newList);
@@ -43,12 +44,19 @@ namespace Lab1
             }
         }
 
+        public TankBattalion(List<T> tanksList)
+        {
+            sortProgress = 0;
+            tanks = tanksList;
+        }
+
         public TankBattalion(Del newDel)
         {
             del = newDel;
         }
 
-        private List<T> tanks = new List<T>();
+        public List<T> tanks = new List<T>();
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return  TankEnumerator();
@@ -96,6 +104,14 @@ namespace Lab1
         public void newSort()
         {
             tanks = del(tanks);
+        }
+
+        public void PrintTanks()
+        {
+            foreach (var tank in tanks)
+            {
+                tank.GetStatus();
+            }
         }
 
         public T Comparison(TypeOfComparison typeOfComparison, T firstTank, T secondTank)

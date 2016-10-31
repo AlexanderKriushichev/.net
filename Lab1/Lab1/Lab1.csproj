@@ -63,6 +63,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Factory\RussianFactory.cs" />
     <Compile Include="Factory\Tank.cs" />
+    <Compile Include="Serialization\ISerialization.cs" />
+    <Compile Include="Serialization\TankPack.cs" />
+    <Compile Include="Serialization\XmlSerialization.cs" />
     <Compile Include="TankBattalion.cs" />
     <Compile Include="Factory\TankGun.cs" />
   </ItemGroup>

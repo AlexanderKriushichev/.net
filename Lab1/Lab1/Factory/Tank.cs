@@ -6,10 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Lab1.Exceptions;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace Lab1
 {
-    class Tank : ICloneable, ITank<IComponent> 
+    [Serializable()]
+    [XmlRoot("Person")]
+    public class Tank : ICloneable, ITank<IComponent> 
     {
         public string name { get; set; }
 
@@ -17,11 +20,12 @@ namespace Lab1
         public event Action<TankEventArgs> OnMove;
         public event Action<TankEventArgs> OnDestroy;
 
-        public Armor armor { get; set; }
-        public Engine engine { get; set; }
-        public Gun gun { get; set; }
+        
+        public Armor armor;
+        public Engine engine;
+        public Gun gun;
 
-        public List<IComponent> components = new List<IComponent>();
+        private List<IComponent> components = new List<IComponent>();
 
         private Factory factory;
         private TypeOfArmor typeOfArmor;
@@ -42,6 +46,33 @@ namespace Lab1
             typeOfArmor = armorType;
             typeOfGun = gunType;
             typeOfEngine = engineType;
+        }
+
+        public Tank()
+        {
+            //var factoryType = new RussianFactory();
+            //name = factoryType.SetName();
+            //gun = factoryType.CreateGun(TypeOfGun.Tank);
+            //SetComponent(gun);
+            //engine = factoryType.CreateEngine(TypeOfEngine.Diesel);
+            //SetComponent(engine);
+            //armor = factoryType.CreateArmor(TypeOfArmor.Composite);
+            //SetComponent(armor);
+
+            //factory = factoryType;
+            //typeOfArmor = TypeOfArmor.Composite;
+            //typeOfGun = TypeOfGun.Tank;
+            //typeOfEngine = TypeOfEngine.Diesel;
+        }
+
+        public Tank(Armor _armor, Engine _engine, Gun _gun)
+        {
+            armor = _armor;
+            engine = _engine;
+            gun = _gun;
+            SetComponent(gun);
+            SetComponent(engine);
+            SetComponent(armor);
         }
 
         public void Move()

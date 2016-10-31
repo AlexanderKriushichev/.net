@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    class DynamicArmor: Armor
+
+    public class DynamicArmor: Armor
     {
 
         public DynamicArmor()

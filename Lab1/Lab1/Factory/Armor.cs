@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Lab1
 {
-    abstract class Armor: IComponent
+    [Serializable()]
+    [XmlInclude(typeof(CompositeArmor))]
+    [XmlInclude(typeof(DynamicArmor))]
+    public abstract class Armor: IComponent
     {
         private float _health;
 

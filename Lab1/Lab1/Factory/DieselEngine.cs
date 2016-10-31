@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    class DieselEngine: Engine
+    [Serializable()]
+
+    public class DieselEngine: Engine
     {
         public DieselEngine()
         {
@@ -48,7 +50,7 @@ namespace Lab1
 
         public override void Status()
         {
-            Console.WriteLine("Газотурбинный двигатель :");
+            Console.WriteLine("Дизельный двигатель :");
             Console.WriteLine("Мощность " + power);
             Console.WriteLine("Запас горючего " + fuelСapacity);
             Console.WriteLine("Состояие " + health);

@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    abstract class Factory
+    [Serializable()]
+
+    public abstract class Factory
     {
 
         protected int serialNumber;

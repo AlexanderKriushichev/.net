@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    class TankGun: Gun
+    [Serializable()]
+
+    public class TankGun: Gun
     {
 
         public TankGun()

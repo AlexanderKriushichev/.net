@@ -19,7 +19,7 @@ namespace Lab1
     /// <summary>
     /// Класс события для танка 
     /// </summary>
-    class TankEventArgs
+    public class TankEventArgs
     {
         public EventType type;
         public TankEventArgs(EventType eventType)

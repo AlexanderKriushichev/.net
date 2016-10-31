@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    class AmericanFactory: Factory
+    [Serializable()]
+
+    public class AmericanFactory: Factory
     {
         public override string SetName()
         {

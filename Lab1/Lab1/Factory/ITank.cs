@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    interface ITank<T> where T : IComponent
+    public interface ITank<T> where T : IComponent
     {
         event Action<TankEventArgs> OnShot;
         event Action<TankEventArgs> OnMove;
@@ -15,9 +15,9 @@ namespace Lab1
         string name { get; set; }
 
 
-        Armor armor { get; set; }
-        Engine engine { get; set; }
-        Gun gun { get; set; }
+        //Armor armor { get; set; }
+        //Engine engine { get; set; }
+        //Gun gun { get; set; }
 
         void SetComponent(T component);
         void GetStatus();

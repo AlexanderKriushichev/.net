@@ -1,4 +1,4 @@
-п»їusing System;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Lab1.Exceptions;
 using Lab1.Logger;
-
+using Lab1.Serialization;
 namespace Lab1
 {
     class Program
@@ -15,23 +15,40 @@ namespace Lab1
         {
             RussianFactory russianFactory = new RussianFactory();
 
-            TankBattalion<Tank> tankBattalion = new TankBattalion<Tank>(100000);
+            TankBattalion<Tank> tankBattalion = new TankBattalion<Tank>(1);
 
-            
+            var xmlSer = new XmlSerialization<Tank>();
 
-            Tank tank = new Tank(russianFactory, TypeOfArmor.Dynamic, TypeOfGun.Artillery, TypeOfEngine.Gasturbine);
-            Tank tank1 = Tank.CreateFromFile("tank.txt");
+            xmlSer.Serialize(tankBattalion, "xml1.xml");
 
-            var consLogger = new ConsoleLogger<ITank<IComponent>>(tank);
-            var fileLogger = new FileLogger<ITank<IComponent>>(tank1, "log1.txt");
+            TankBattalion<Tank> tankBattalion1 = xmlSer.Deserialize("xml1.xml");
 
-            consLogger.Log += LogOnLog;
-            fileLogger.Log += LogOnLog;
+            foreach (Tank t in tankBattalion)
+            {
+                t.GetStatus();
+            }
+
+            Console.WriteLine("______");
+
+            foreach (Tank t in tankBattalion1)
+            {
+                t.GetStatus();
+            }
+
+
+            //Tank tank = new Tank(russianFactory, TypeOfArmor.Dynamic, TypeOfGun.Artillery, TypeOfEngine.Gasturbine);
+            //Tank tank1 = Tank.CreateFromFile("tank.txt");
+
+            //var consLogger = new ConsoleLogger<ITank<IComponent>>(tank);
+            //var fileLogger = new FileLogger<ITank<IComponent>>(tank1, "log1.txt");
+
+            //consLogger.Log += LogOnLog;
+            //fileLogger.Log += LogOnLog;
 
             ////tank.Move();
             ////tank.Shot(tank1);
 
-            //// РЅРµ СЃСЂР°Р±РѕС‚Р°РµС‚, С‚Р°Рє РєР°Рє РЅРµС‚ С†РµР»Рё, РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ 
+            //// не сработает, так как нет цели, пользовательское исключение 
             //try
             //{
             //    tank1.Shot(null);
@@ -45,7 +62,7 @@ namespace Lab1
             //    ExceptionsLogger.LogSystemException(error);
             //}
 
-            //// РЅРµ СЃСЂР°Р±РѕС‚Р°РµС‚, С‚Р°РєРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РЅРµС‚, СЃРёСЃС‚РµРјРЅРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ
+            //// не сработает, такого элемента нет, системное исключение
             //try
             //{
             //    tank1.Shot(tankBattalion[0]);
@@ -70,8 +87,8 @@ namespace Lab1
             //tank.gun.Destroy();
 
 
-            Task t = tankBattalion.AsyncSort();
-            t.Wait();
+            //Task t = tankBattalion.AsyncSort();
+            //t.Wait();
 
             
 
@@ -109,7 +126,7 @@ namespace Lab1
         }
 
         /// <summary>
-        /// РњРµС‚РѕРґ РїРµС‡Р°С‚Рё Р»РѕРіР°
+        /// Метод печати лога
         /// </summary>
         /// <param name="writer"></param>
         /// <param name="tank"></param>
@@ -120,17 +137,17 @@ namespace Lab1
             switch (args.type)
             {
                 case EventType.Move:
-                    message = "РўР°РЅРє " + tank.name + " РґРІРёР¶РµС‚СЃСЏ";
+                    message = "Танк " + tank.name + " движется";
                     break;
                 case EventType.Destroy:
-                    message = "РўР°РЅРє " + tank.name + " СѓРЅРёС‡С‚РѕР¶РµРЅ";
+                    message = "Танк " + tank.name + " уничтожен";
                     break;
                 case EventType.Shot:
-                    message = "РўР°РЅРє " + tank.name + " СЃС‚СЂРµР»СЏРµС‚ РїРѕ " + (args as  TankShotEventArgs).target.name;
+                    message = "Танк " + tank.name + " стреляет по " + (args as  TankShotEventArgs).target.name;
                     break;
                 
             }
             writer.WriteLine(DateTime.Now.ToString("HH:mm:ss") + " " + message);
         }
     }
-}
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 

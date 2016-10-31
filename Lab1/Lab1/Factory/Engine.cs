@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Lab1
 {
-    abstract class Engine: IComponent
+    [Serializable()]
+    [XmlInclude(typeof(DieselEngine))]
+    [XmlInclude(typeof(GasturbineEngine))]
+    public abstract class Engine: IComponent
     {
         protected float _fuel;
         public float fuelСapacity
@@ -51,7 +55,7 @@ namespace Lab1
 
         public abstract void Create();
 
-        public float power { get; protected set; }
+        public float power { get; set; }
 
         public abstract void Drive();
 

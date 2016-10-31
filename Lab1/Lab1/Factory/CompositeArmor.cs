@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    class CompositeArmor: Armor
+    [Serializable()]
+
+    public class CompositeArmor: Armor
     {
         public CompositeArmor()
         {

@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    class GasturbineEngine: Engine
+    [Serializable()]
+
+    public class GasturbineEngine: Engine
     {
 
         public GasturbineEngine()

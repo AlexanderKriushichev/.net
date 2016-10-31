@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    interface IComponent
+    public interface IComponent
     {
         void Create();
 

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    class ArtilleryGun: Gun, IComponentInfo<ArtilleryGun>
+    [Serializable()]
+    public class ArtilleryGun:Gun, IComponentInfo<ArtilleryGun>
     {
         public string name = "ArtilleryGun";
 

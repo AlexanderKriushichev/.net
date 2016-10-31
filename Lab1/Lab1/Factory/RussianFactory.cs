@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    class RussianFactory: Factory
+    [Serializable()]
+
+    public class RussianFactory: Factory
     {
 
 

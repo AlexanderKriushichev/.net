@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Lab1
 {
-    abstract class Gun: IComponent 
+    [Serializable]
+    [XmlInclude(typeof(TankGun))]
+    [XmlInclude(typeof(ArtilleryGun))]
+    public abstract class Gun: IComponent 
     {
         public delegate void Del();
 
         public abstract void Create();
 
-        public float strength { get; protected set; }
+        public float strength { get;  set; }
 
-        public float range { get; protected set; }
+        public float range { get;  set; }
 
         private float _health;
 
