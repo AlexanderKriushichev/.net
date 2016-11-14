@@ -34,8 +34,9 @@ namespace Lab1.Serialization
             {
                 wrap = (TankPack<T>)xml.Deserialize(fStream);
             }
-
-            return new TankBattalion<T>(wrap.tanks);
+            var temp = wrap.tanks.Select(tank => (T)tank).ToList();
+            TankBattalion<T> bat = new TankBattalion<T>(temp);
+            return bat;
         }
     }
 }

@@ -8,6 +8,7 @@ using Lab1.Exceptions;
 using System.IO;
 using System.Xml.Serialization;
 
+
 namespace Lab1
 {
     [Serializable()]
@@ -20,7 +21,7 @@ namespace Lab1
         public event Action<TankEventArgs> OnMove;
         public event Action<TankEventArgs> OnDestroy;
 
-        
+       
         public Armor armor;
         public Engine engine;
         public Gun gun;
@@ -28,9 +29,9 @@ namespace Lab1
         private List<IComponent> components = new List<IComponent>();
 
         private Factory factory;
-        private TypeOfArmor typeOfArmor;
-        private TypeOfGun typeOfGun;
-        private TypeOfEngine typeOfEngine;
+        public TypeOfArmor typeOfArmor;
+        public TypeOfGun typeOfGun;
+        public TypeOfEngine typeOfEngine;
 
         public Tank(Factory factoryType, TypeOfArmor armorType, TypeOfGun gunType, TypeOfEngine engineType)
         {
@@ -187,6 +188,13 @@ namespace Lab1
 
         public void GetStatus()
         {
+            if (components.Count == 0)
+            {
+                components.Add(gun);
+                components.Add(engine);
+                components.Add(armor);
+
+            }
             foreach (IComponent comp in components)
             {
                 comp.Status();

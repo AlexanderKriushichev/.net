@@ -15,26 +15,45 @@ namespace Lab1
         {
             RussianFactory russianFactory = new RussianFactory();
 
-            TankBattalion<Tank> tankBattalion = new TankBattalion<Tank>(1);
+            TankBattalion<Tank> tankBattalion = new TankBattalion<Tank>(2);
 
             var xmlSer = new XmlSerialization<Tank>();
+            var jsonSer = new JSONSerialization<Tank>();
+            var binSer = new BinarySerialization<Tank>();
 
             xmlSer.Serialize(tankBattalion, "xml1.xml");
+            jsonSer.Serialize(tankBattalion, "jsonTanks.json");
+            binSer.Serialize(tankBattalion, "binary.dat");
 
-            TankBattalion<Tank> tankBattalion1 = xmlSer.Deserialize("xml1.xml");
+            TankBattalion<Tank> tankBattalion1 = new TankBattalion<Tank>(0);
+            TankBattalion<Tank> tankBattalion2 = new TankBattalion<Tank>(0);
+            TankBattalion<Tank> tankBattalion3 = new TankBattalion<Tank>(0);
+
+            tankBattalion1 = xmlSer.Deserialize("xml1.xml");
+            tankBattalion2 = binSer.Deserialize("binary.dat");
+            tankBattalion3 = jsonSer.Deserialize("jsonTanks.json");
 
             foreach (Tank t in tankBattalion)
             {
                 t.GetStatus();
+                Console.WriteLine("\n");
             }
+
+            //Console.WriteLine("______");
+
+            //foreach (Tank t in tankBattalion1)
+            //{
+            //    t.GetStatus();
+            //}
 
             Console.WriteLine("______");
 
-            foreach (Tank t in tankBattalion1)
+            foreach (Tank t in tankBattalion3)
             {
                 t.GetStatus();
-            }
+                Console.WriteLine("\n");
 
+            }
 
             //Tank tank = new Tank(russianFactory, TypeOfArmor.Dynamic, TypeOfGun.Artillery, TypeOfEngine.Gasturbine);
             //Tank tank1 = Tank.CreateFromFile("tank.txt");

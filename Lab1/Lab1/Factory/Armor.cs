@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 namespace Lab1
 {
     [Serializable()]
     [XmlInclude(typeof(CompositeArmor))]
     [XmlInclude(typeof(DynamicArmor))]
+    [DataContract]
     public abstract class Armor: IComponent
     {
         private float _health;
