@@ -68,16 +68,35 @@ namespace Lab1
 
         public void Sort()
         {
-            T obmTank;
-            for (int i = 0; i < tanks.Count-1; i++)
+            tanks = sort(tanks);
+        }
+
+        public List<T> sort(List<T> massive)
+        {
+            if (massive.Count == 1)
+                return massive;
+            int mid_point = massive.Count / 2;
+            return merge(sort(massive.Take(mid_point).ToList()), sort(massive.Skip(mid_point).ToList()));
+        }
+        public List<T> merge(List<T> mass1, List<T> mass2)
+        {
+            Console.WriteLine("123");
+            int a = 0, b = 0;
+            T[] merged = new T[mass1.Count + mass2.Count];
+            for (int i = 0; i < mass1.Count + mass2.Count; i++)
             {
-                if (tanks[i].armor.health < tanks[i + 1].armor.health)
-                {
-                    obmTank = tanks[i];
-                    tanks[i] = tanks[i + 1];
-                    tanks[i + 1] = obmTank;
-                }
+                if (b < mass2.Count && a < mass1.Count)
+                    if (mass1[a].armor.health > mass2[b].armor.health && b < mass2.Count)
+                        merged[i] = mass2[b++];
+                    else
+                        merged[i] = mass1[a++];
+                else
+                    if (b < mass2.Count)
+                        merged[i] = mass2[b++];
+                    else
+                        merged[i] = mass1[a++];
             }
+            return merged.ToList();
         }
 
         public async Task AsyncSort()

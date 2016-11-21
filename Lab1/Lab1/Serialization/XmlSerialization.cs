@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Lab1.Serialization
 {
-    class XmlSerialization<T> :ISerialization<T> where T: Tank
+    public class XmlSerialization<T> :ISerialization<T> where T: Tank
     {
         private XmlSerializer xml;
 

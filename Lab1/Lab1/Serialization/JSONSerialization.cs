@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Lab1.Serialization
 {
-    class JSONSerialization<T> : ISerialization<T> where T : Tank
+    public class JSONSerialization<T> : ISerialization<T> where T : Tank
     {
         public void Serialize(TankBattalion<T> tank, string filePath)
         {

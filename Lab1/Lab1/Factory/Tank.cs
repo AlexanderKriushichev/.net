@@ -78,7 +78,7 @@ namespace Lab1
 
         public void Move()
         {
-            OnMove.Invoke(new TankEventArgs(EventType.Move));
+            //OnMove.Invoke(new TankEventArgs(EventType.Move));
             engine.Drive();
         }
 
@@ -158,7 +158,7 @@ namespace Lab1
             if (target == null)
                 throw new TankShotException("Выберите цель для выстрела");
             gun.Shot(gun.Recharge);
-            OnShot.Invoke(new TankShotEventArgs(target));
+            //OnShot.Invoke(new TankShotEventArgs(target));
 
             target.armor.Contact(gun.strength);
         }
@@ -178,7 +178,9 @@ namespace Lab1
 
         public object Clone()
         {
-            return new Tank(factory, typeOfArmor, typeOfGun, typeOfEngine);
+            var cloneTank = new Tank(factory, typeOfArmor, typeOfGun, typeOfEngine);
+            cloneTank.name = name;
+            return cloneTank;
         }
 
         public List<IComponent> ReturnObject()

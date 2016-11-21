@@ -9,7 +9,6 @@ C:\Users\Alex\Documents\.net\Lab1\Lab1\obj\Debug\Lab1.exe
 C:\Users\Alex\Documents\.net\Lab1\Lab1\obj\Debug\Lab1.pdb
 C:\Users\Alex\Documents\.net\Lab1\Lab1\bin\Debug\Lab1.exe
 C:\Users\Alex\Documents\.net\Lab1\Lab1\bin\Debug\Lab1.pdb
-C:\Users\Alex\Documents\.net\Lab1\Lab1\obj\Debug\Lab1.csprojResolveAssemblyReference.cache
 C:\Users\Home\Documents\.net\Lab1\Lab1\bin\Debug\Lab1.exe.config
 C:\Users\Home\Documents\.net\Lab1\Lab1\bin\Debug\Lab1.exe
 C:\Users\Home\Documents\.net\Lab1\Lab1\bin\Debug\Lab1.pdb
@@ -17,3 +16,4 @@ C:\Users\Home\Documents\.net\Lab1\Lab1\obj\Debug\Lab1.csprojResolveAssemblyRefer
 C:\Users\Home\Documents\.net\Lab1\Lab1\obj\Debug\Lab1.exe
 C:\Users\Home\Documents\.net\Lab1\Lab1\obj\Debug\Lab1.pdb
 C:\Users\Alex\Documents\.net\Lab1\Lab1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Alex\Documents\.net\Lab1\Lab1\obj\Debug\Lab1.csprojResolveAssemblyReference.cache

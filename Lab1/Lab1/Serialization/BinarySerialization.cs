@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Lab1.Serialization
 {
-    class BinarySerialization<T> : ISerialization<T> where T : Tank
+    public class BinarySerialization<T> : ISerialization<T> where T : Tank
     {
         private readonly BinaryFormatter _binFormat;
 
