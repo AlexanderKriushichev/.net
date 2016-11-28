@@ -10,6 +10,11 @@ using System.Xml.Serialization;
 
 namespace Lab1.Serialization
 {
+    /// <summary>
+    /// Класс обертка для сериализации
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+   
     [Serializable]
     [XmlRoot]
     public class TankPack<T> where T : Tank

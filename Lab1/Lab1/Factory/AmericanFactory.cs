@@ -15,7 +15,7 @@ namespace Lab1
             serialNumber++;
             return "Абрамс "+ serialNumber;
         }
-
+       
         public override Gun CreateGun(TypeOfGun type)
         {
             switch (type)

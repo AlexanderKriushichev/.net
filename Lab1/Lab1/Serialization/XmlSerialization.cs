@@ -36,6 +36,10 @@ namespace Lab1.Serialization
             }
             var temp = wrap.tanks.Select(tank => (T)tank).ToList();
             TankBattalion<T> bat = new TankBattalion<T>(temp);
+            foreach (Tank t in bat)
+            {
+                t.SetComponents();
+            }
             return bat;
         }
     }

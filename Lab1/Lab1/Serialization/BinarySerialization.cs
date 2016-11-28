@@ -29,7 +29,12 @@ namespace Lab1.Serialization
         {
 			using (var fs = new FileStream(filePath, FileMode.Open))
 			{
-                return (TankBattalion<T>)_binFormat.Deserialize(fs);
+                TankBattalion<T> bat = (TankBattalion<T>)_binFormat.Deserialize(fs);
+                foreach (Tank t in bat)
+                {
+                    t.SetComponents();
+                }
+                return bat;
 			}
 		}
     }

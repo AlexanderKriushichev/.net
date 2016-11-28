@@ -8,12 +8,24 @@ namespace Lab1
 {
     public interface IComponent
     {
+        /// <summary>
+        /// Создать
+        /// </summary>
         void Create();
 
+        /// <summary>
+        /// Обновить
+        /// </summary>
         void Reset();
 
+        /// <summary>
+        /// Вывести статус
+        /// </summary>
         void Status();
 
+        /// <summary>
+        /// Уничтожить
+        /// </summary>
         void Destroy();
     }
 

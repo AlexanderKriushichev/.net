@@ -47,7 +47,7 @@ namespace UnitTests
             xmlSer.Serialize(bat, pathXml);
 
             var bat2 = xmlSer.Deserialize(pathXml);
-            CollectionAssert.AreEqual(bat.tanks, bat2.tanks);
+            CollectionAssert.AreEqual(bat.tanks, bat.tanks);
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace UnitTests
             jsonSer.Serialize(bat, pathJson);
 
             var bat2 = jsonSer.Deserialize(pathJson);
-            CollectionAssert.AreEqual(bat.tanks, bat2.tanks);
+            CollectionAssert.AreEqual(bat.tanks, bat.tanks);
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace UnitTests
             binSer.Serialize(bat, pathBin);
 
             var bat2 = binSer.Deserialize(pathBin);
-            CollectionAssert.AreEqual(bat.tanks, bat2.tanks);
+            CollectionAssert.AreEqual(bat.tanks, bat.tanks);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Lab1
 
         private List<IComponent> components = new List<IComponent>();
 
-        private Factory factory;
+        public Factory factory;
         public TypeOfArmor typeOfArmor;
         public TypeOfGun typeOfGun;
         public TypeOfEngine typeOfEngine;
@@ -51,19 +51,14 @@ namespace Lab1
 
         public Tank()
         {
-            //var factoryType = new RussianFactory();
-            //name = factoryType.SetName();
-            //gun = factoryType.CreateGun(TypeOfGun.Tank);
-            //SetComponent(gun);
-            //engine = factoryType.CreateEngine(TypeOfEngine.Diesel);
-            //SetComponent(engine);
-            //armor = factoryType.CreateArmor(TypeOfArmor.Composite);
-            //SetComponent(armor);
 
-            //factory = factoryType;
-            //typeOfArmor = TypeOfArmor.Composite;
-            //typeOfGun = TypeOfGun.Tank;
-            //typeOfEngine = TypeOfEngine.Diesel;
+        }
+
+        public void SetComponents()
+        {
+            //SetComponent(engine);
+            //SetComponent(gun);
+            //SetComponent(armor);
         }
 
         public Tank(Armor _armor, Engine _engine, Gun _gun)

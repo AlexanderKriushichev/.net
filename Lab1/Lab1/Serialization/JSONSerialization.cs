@@ -23,7 +23,12 @@ namespace Lab1.Serialization
             var json = File.ReadAllText(filePath);
             var jset = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All };
             var wrap = JsonConvert.DeserializeObject<TankPack<T>>(json, jset);
-            return new TankBattalion<T>(wrap.tanks);
+            var bar = new TankBattalion<T>(wrap.tanks);
+            foreach (Tank t in bar)
+            {
+                t.SetComponents();
+            }
+            return bar;
         }
     }
 }

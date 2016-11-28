@@ -23,6 +23,11 @@ namespace Lab1
             Console.Write("\rПрогресс: {0}%", pr);
         }
 
+
+        /// <summary>
+        /// Конструктор батальона
+        /// </summary>
+        /// <param name="count">Колличество танков</param>
         public TankBattalion(int count)
         {
             RussianFactory russianFactory = new RussianFactory();
@@ -44,17 +49,28 @@ namespace Lab1
             }
         }
 
+        /// <summary>
+        /// Конструктор батальона
+        /// </summary>
+        /// <param name="tanksList">Список танков</param>
         public TankBattalion(List<T> tanksList)
         {
             sortProgress = 0;
             tanks = tanksList;
         }
 
+        /// <summary>
+        /// Конструктор батальона
+        /// </summary>
+        /// <param name="newDel">Делегат</param>
         public TankBattalion(Del newDel)
         {
             del = newDel;
         }
 
+        /// <summary>
+        /// Список танков
+        /// </summary>
         public List<T> tanks = new List<T>();
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -66,11 +82,19 @@ namespace Lab1
             return  TankEnumerator();
         }
 
+        /// <summary>
+        /// Сортировка
+        /// </summary>
         public void Sort()
         {
             tanks = sort(tanks);
         }
 
+        /// <summary>
+        /// Сортировка
+        /// </summary>
+        /// <param name="massive">Список танков</param>
+        /// <returns>Отсортированный список</returns>
         public List<T> sort(List<T> massive)
         {
             if (massive.Count == 1)
@@ -99,6 +123,10 @@ namespace Lab1
             return merged.ToList();
         }
 
+        /// <summary>
+        /// Ассинхронная сортировка
+        /// </summary>
+        /// <returns></returns>
         public async Task AsyncSort()
         {
             await Task.Run(() =>
@@ -120,11 +148,17 @@ namespace Lab1
             });
         }
 
+        /// <summary>
+        /// Сортировка делегатом
+        /// </summary>
         public void newSort()
         {
             tanks = del(tanks);
         }
 
+        /// <summary>
+        /// вывод информации о всех танков
+        /// </summary>
         public void PrintTanks()
         {
             foreach (var tank in tanks)
